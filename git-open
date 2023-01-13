@@ -262,10 +262,24 @@ if [ "$file" ]; then
       echo "File $file is not in repository" 1>&2
       exit 1
     fi
-    openurl="$openurl/$absfile"
+
+    // azure URLs vs github
+    # echo "checking for azure url $domain"
+    if [[ "$domain" == *"azure.com" ]];
+    then
+      openurl="$openurl&path=$absfile"
+    else
+      openurl="$openurl/$absfile"
+    fi
+
     if [ "$file_line" ]; then
-      echo "file line: " $file_line;
-      openurl="$openurl#L$file_line"
+      if [[ "$domain" == *"azure.com" ]];
+      then
+        # &line=10&lineEnd=11&lineStartColumn=1&lineEndColumn=1
+        openurl="$openurl&lineStartColumn=1&lineEndColumn=1&line=$file_line&lineEnd=$((file_line + 1))"
+      else
+        openurl="$openurl#L$file_line"
+      fi
     fi
     echo "openurl: " $openurl;
 fi
