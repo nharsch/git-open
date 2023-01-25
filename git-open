@@ -263,7 +263,7 @@ if [ "$file" ]; then
       exit 1
     fi
 
-    // azure URLs vs github
+    # azure URLs vs github
     # echo "checking for azure url $domain"
     if [[ "$domain" == *"azure.com" ]];
     then
