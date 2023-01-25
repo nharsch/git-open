@@ -256,7 +256,6 @@ elif [[ $remote_ref != "master" || "$file" ]]; then
 fi
 
 if [ "$file" ]; then
-    echo "file: " $file;
     absfile=$(git ls-tree --full-name --name-only $branch $file)
     if [[ -z "$absfile" ]]; then
       echo "File $file is not in repository" 1>&2
