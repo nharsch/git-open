@@ -281,7 +281,6 @@ if [ "$file" ]; then
         openurl="$openurl#L$file_line"
       fi
     fi
-    echo "openurl: " $openurl;
 fi
 
 if [ "$suffix" ]; then
