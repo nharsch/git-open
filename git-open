@@ -256,15 +256,15 @@ elif [[ $remote_ref != "master" || "$file" ]]; then
 fi
 
 if [ "$file" ]; then
-    echo "file: " $file;
+    # echo "file: " $file;
     absfile=$(git ls-tree --full-name --name-only $branch $file)
     if [[ -z "$absfile" ]]; then
       echo "File $file is not in repository" 1>&2
       exit 1
     fi
 
-    // azure URLs vs github
-    # echo "checking for azure url $domain"
+    # azure URLs vs github
+    echo "checking for azure url $domain"
     if [[ "$domain" == *"azure.com" ]];
     then
       openurl="$openurl&path=$absfile"
@@ -281,13 +281,13 @@ if [ "$file" ]; then
         openurl="$openurl#L$file_line"
       fi
     fi
-    echo "openurl: " $openurl;
 fi
 
 if [ "$suffix" ]; then
     openurl="$openurl/$suffix"
 fi
 
+# echo "finding current browser"
 # get current open browser command
 case $( uname -s ) in
   Darwin)   open='open';;
@@ -302,6 +302,8 @@ case $( uname -s ) in
             fi;;
 esac
 
+# echo "browser echo?"
+
 if (( print_only )); then
   BROWSER="echo"
 fi
@@ -312,4 +314,4 @@ if [[ $BROWSER != "echo" ]]; then
 fi
 
 # open it in a browser
-${BROWSER:-$open} "$openurl"
+"${BROWSER:-$open}" "$openurl"
